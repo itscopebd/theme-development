@@ -1,0 +1,216 @@
+
+<div id="section-{{ section.id }}" class="about">
+    <div class="container">
+       <div class="row">
+          <div class="col-md-6 offset-md-3">
+             <div class="titlepage">
+                <h2>{{ section.settings.section_title }}</h2>
+                <span>{{ section.settings.description }}</span>
+             </div>
+          </div>
+          <div class="col-md-12">
+             <div class="about_img">
+                <figure><img src="{{section.settings.about_image | img_url:"master"}}" alt="{{ section.settings.about_image.alt }}"/></figure>
+                <a class="read_more" href="{{section.settings.url}}">{{section.settings.btn_text}}</a>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ 
+ {%- render 'section_typography' -%}
+ 
+
+ {% schema %}
+ {
+	"name": "About",
+	"settings": [
+	{
+     "type":"text",
+	 "id":"section_title",
+	 "label":"Section title",
+	 "default":"Section Title"
+	},
+	{
+    "type":"text",
+	"id":"description",
+	"label":"Description",
+	"default":"Description"
+	},
+	{
+		"type":"image_picker",
+		"id":"about_image",
+		"label":"Image"
+	},{
+		"type":"url",
+		"id":"url",
+		"label":"Product Url"
+	}
+	,{
+		"type":"text",
+		"id":"btn_text",
+		"label":"Button Text",
+		"default":"Shop"
+	}
+	],
+	"blocks":[
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+	"presets": [
+		{
+		  "name": "Custom HTML",
+		  "category": "others",
+		  "blocks":[
+				{
+					"type": "section_padding"
+				},{
+					"type": "section_margin"
+				},{
+					"type": "section_background"
+				}
+			]
+		}
+	]
+}
+{% endschema %}
