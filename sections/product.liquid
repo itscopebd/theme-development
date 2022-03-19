@@ -1,0 +1,297 @@
+<div class="products" id="section-{{section.id}}" >
+    <div class="container">
+       <div class="row">
+          {% if section.settings.section_title_anable %}
+          <div class="col-md-12">
+             <div class="titlepage">
+                <h2 class="{% if section.settings.text_align=='left' %} text-left {% elsif section.settings.text_align=='center'%} text-center {% elsif section.settings.text_align=='right' %} text-right {% endif %} ">{{section.settings.Section_Title}}</h2>
+                <span>{{ section.settings.short_des }}</span>
+             </div>
+          </div>
+          {% endif %}
+       </div>
+       {%  assign collection_product = collections[section.settings.collection_url] %}
+       <div class="row">
+          {% for product in collection_product.products limit:section.settings.product_limit %}
+          <div class="col-lg-3 col-md-6 col-sm-6">
+             <div id="ho_bo" class="our_products">
+                <div class="product">
+                   <figure><img src="{{product.featured_image.src | img_url:"master"}}" alt="#"/></figure>
+                </div>
+                
+                <span>{{product.title}}</span>
+                <p>{{product.price | money }}</p>
+             </div>
+          </div>
+
+       
+     {% endfor %}
+       
+       </div>
+    </div>
+ </div>
+
+ {%- render 'section_typography' -%}
+
+ {% schema %}
+ {
+     "name":"product",
+     "settings":[
+     {
+         "type":"text",
+         "id":"Section_Title",
+         "label":"Section Title",
+         "default":"Section Title"
+     },{
+         "type":"text",
+         "id":"short_des",
+         "label":"Description",
+         "default":"Short Description"
+     },
+     {
+         "type":"collection",
+         "id":"collection_url",
+         "label":"Collection Url"
+     },{
+        "type":"range",
+        "id":"product_limit",
+        "label":"Product Limit",
+        "min":4,
+        "max":16,
+        "default":4
+     },
+     {
+      "type":"checkbox",
+      "id":"section_title_anable",
+      "label":"Section Title Anable",
+      "default":true
+     }
+     ,{
+        "type":"select",
+        "id":"text_align",
+        "label":"Section Title Align",
+        "options":[
+        {
+           "value":"left",
+           "label":"Left"
+        },
+        {
+           "value":"center",
+           "label":"Center"
+
+        }
+        ,{
+           "value":"right",
+           "label":"Right"
+        }
+        
+        ],
+        "default":"left"
+     }
+     ],
+     "blocks":[
+     {
+      "type": "section_padding",
+      "name": "Section Padding",
+    "limit": 1,
+      "settings": [
+        {
+       "type": "header",
+       "content": "Large/Desktop Device"
+     },
+     {
+       "type": "range",
+       "id": "section_padding_top",
+       "min": 0,
+       "max": 150,
+       "step": 5,
+       "label": "Padding Top",
+       "unit": "px",
+       "default": 0
+     },
+     {
+       "type": "range",
+       "id": "section_padding_bottom",
+       "min": 0,
+       "max": 150,
+       "step": 5,
+       "label": "Padding Bottom",
+       "unit": "px",
+       "default": 100
+     },
+     {
+       "type": "header",
+       "content": "Tablet Device"
+     },
+     {
+       "type": "range",
+       "id": "section_padding_top_md",
+       "min": 0,
+       "max": 150,
+       "step": 5,
+       "label": "Padding Top",
+       "unit": "px",
+       "default": 0
+     },{
+        "type": "range",
+        "id": "section_padding_bottom_md",
+        "min": 0,
+        "max": 150,
+        "step": 5,
+        "label": "Padding Bottom",
+        "unit": "px",
+        "default": 0
+       },{
+          "type":"header",
+          "content":"Mobile Devices"
+       },{
+          "type":"range",
+          "id":"section_padding_mobile_top",
+          "unit":"px",
+          "min":5,
+          "max":150,
+          "step":5,
+          "label":"Padding Top",
+          "default":5
+       },{
+          "type":"range",
+          "id":"section_padding_mobile_bottom",
+          "min":5,
+          "max":150,
+          "unit":"px",
+          "step":5,
+          "label":"Padding Bottom",
+          "default":5
+
+       }
+
+      ]
+   },{
+      "type": "section_margin",
+      "name": "Section Margin",
+    "limit": 1,
+      "settings": [
+        {
+       "type": "header",
+       "content": "Large/Desktop Device"
+     },
+     {
+       "type": "range",
+       "id": "section_margin_top",
+       "min": 0,
+       "max": 150,
+       "step": 5,
+       "label": "Margin Top",
+       "unit": "px",
+       "default": 0
+     },
+     {
+       "type": "range",
+       "id": "section_margin_bottom",
+       "min": 0,
+       "max": 150,
+       "step": 5,
+       "label": "Margin Bottom",
+       "unit": "px",
+       "default": 0
+     },
+     {
+       "type": "header",
+       "content": "Tablet Device"
+     },
+     {
+       "type": "range",
+       "id": "section_margin_top_md",
+       "min": 0,
+       "max": 150,
+       "step": 5,
+       "label": "Margin Top",
+       "unit": "px",
+       "default": 0
+     },
+     {
+       "type": "range",
+       "id": "section_margin_bottom_md",
+       "min": 0,
+       "max": 150,
+       "step": 5,
+       "label": "Margin Bottom",
+       "unit": "px",
+       "default": 0
+     },
+     {
+       "type": "header",
+       "content": "Mobile Device"
+     },
+     {
+       "type": "range",
+       "id": "section_margin_top_xs",
+       "min": 0,
+       "max": 150,
+       "step": 5,
+       "label": "Margin Top",
+       "unit": "px",
+       "default": 0
+     },
+     {
+       "type": "range",
+       "id": "section_margin_bottom_xs",
+       "min": 0,
+       "max": 150,
+       "step": 5,
+       "label": "Margin Bottom",
+       "unit": "px",
+       "default": 0
+     },{
+        "type":"header",
+        "content":"Mobile Devices"
+     },{
+        "type":"range",
+        "unit":"px",
+        "max":150,
+        "min":5,
+        "step":5,
+        "label":"Margin Top",
+        "id":"section_margin_mobile_top",
+        "default":5
+     },{
+        "type":"range",
+        "step":5,
+        "default":5,
+        "min":5,
+        "max":150,
+        "id":"section_margin_mobile_bottom",
+        "label":"Margin Bottom"
+     }
+      ]
+   },
+   {
+      "type": "section_background",
+      "name": "Section Background",
+    "limit": 1,
+      "settings": [
+        {
+       "type": "image_picker",
+       "id": "section_bg_image",
+       "label": "BG Image"
+     },
+     {
+       "type": "color",
+       "id": "section_bg_color",
+       "label": "BG Color",
+       "default": "#ffffff"
+     }
+      ]
+   }
+     
+     
+     
+     ],
+     "presets":[
+     {
+         "name":"Product",
+         "category":"others"
+     }
+     ]
+ }
+ {% endschema %}
