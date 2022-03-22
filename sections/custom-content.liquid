@@ -1,0 +1,263 @@
+   <!-- using -->
+   <div class="using" id="section-{{section.id}}">
+    <div class="container-fluid">
+       <div class="row d_flex">
+        {% for block in section.blocks %}
+        {% case  block.type %}
+        {% when "html_content" %}
+          <div class="col-md-{{block.settings.html_content_column}}">
+             <div class="titlepage">
+               {{block.settings.html_content}}
+                <a class="read_more white_bg" href="Javascript:void(0)"> {{block.settings.btn_text}}</a>
+             </div>
+          </div>
+{% if block.settings.css_content !='' %}
+   <style>
+      {{ block.settings.css_content }}
+   </style>
+{% endif %}
+
+          {%  when "image_content" %}
+          <div class="col-md-{{ block.settings.content_column }} padding_right0">
+             <div class="frout_img">
+            
+                <a href="">
+                  <figure><img src="{{block.settings.content_image | img_url:'master'}}" alt="#"/></figure>
+                </a>
+             </div>
+          </div>
+          {% endcase %}
+          {% endfor %}
+       </div>
+    </div>
+ </div>
+ {%- render 'section_typography' -%}
+ {% schema %}
+ {
+    "name":"Custom Content",
+    "settings":[],
+    "blocks":[
+
+    {
+      "type": "section_padding",
+      "name": "Section Padding",
+    "limit": 1,
+      "settings": [
+        {
+       "type": "header",
+       "content": "Large/Desktop Device"
+     },
+     {
+       "type": "range",
+       "id": "section_padding_top",
+       "min": 0,
+       "max": 150,
+       "step": 5,
+       "label": "Padding Top",
+       "unit": "px",
+       "default": 0
+     },
+     {
+       "type": "range",
+       "id": "section_padding_bottom",
+       "min": 0,
+       "max": 150,
+       "step": 5,
+       "label": "Padding Bottom",
+       "unit": "px",
+       "default": 100
+     },
+     {
+       "type": "header",
+       "content": "Tablet Device"
+     },
+     {
+       "type": "range",
+       "id": "section_padding_top_md",
+       "min": 0,
+       "max": 150,
+       "step": 5,
+       "label": "Padding Top",
+       "unit": "px",
+       "default": 0
+     }
+      ]
+   },
+
+   {
+      "type": "section_margin",
+      "name": "Section Margin",
+    "limit": 1,
+      "settings": [
+        {
+       "type": "header",
+       "content": "Large/Desktop Device"
+     },
+     {
+       "type": "range",
+       "id": "section_margin_top",
+       "min": 0,
+       "max": 150,
+       "step": 5,
+       "label": "Margin Top",
+       "unit": "px",
+       "default": 0
+     },
+     {
+       "type": "range",
+       "id": "section_margin_bottom",
+       "min": 0,
+       "max": 150,
+       "step": 5,
+       "label": "Margin Bottom",
+       "unit": "px",
+       "default": 0
+     },
+     {
+       "type": "header",
+       "content": "Tablet Device"
+     },
+     {
+       "type": "range",
+       "id": "section_margin_top_md",
+       "min": 0,
+       "max": 150,
+       "step": 5,
+       "label": "Margin Top",
+       "unit": "px",
+       "default": 0
+     },
+     {
+       "type": "range",
+       "id": "section_margin_bottom_md",
+       "min": 0,
+       "max": 150,
+       "step": 5,
+       "label": "Margin Bottom",
+       "unit": "px",
+       "default": 0
+     },
+     {
+       "type": "header",
+       "content": "Mobile Device"
+     },
+     {
+       "type": "range",
+       "id": "section_margin_top_xs",
+       "min": 0,
+       "max": 150,
+       "step": 5,
+       "label": "Margin Top",
+       "unit": "px",
+       "default": 0
+     },
+     {
+       "type": "range",
+       "id": "section_margin_bottom_xs",
+       "min": 0,
+       "max": 150,
+       "step": 5,
+       "label": "Margin Bottom",
+       "unit": "px",
+       "default": 0
+     }
+      ]
+   },
+   {
+      "type": "section_background",
+      "name": "Section Background",
+    "limit": 1,
+      "settings": [
+        {
+       "type": "image_picker",
+       "id": "section_bg_image",
+       "label": "BG Image"
+     },
+     {
+       "type": "color",
+       "id": "section_bg_color",
+       "label": "BG Color",
+       "default": "#ffffff"
+     }
+      ]
+   },
+
+    {
+        "type":"image_content",
+        "name":"Image Contnent",
+        "settings":[
+        {
+            "type":"range",
+            "id":"content_column",
+            "label":"content Column",
+            "min":6,
+            "max":12,
+            "default":6,
+            "unit":"/12",
+            "step":2
+
+        },
+        {
+            "type":"image_picker",
+            "id":"content_image",
+            "label":"Image"
+            
+        },{
+           "type":"url",
+           "id":"img_url",
+           "label":"Image URL"
+        }
+        ]
+    },
+    {
+    "type":"html_content",
+    "name":"Html Content",
+    "settings":[
+    
+    {
+       "type":"range",
+       "id":"html_content_column",
+       "min":6,
+       "max":12,
+       "unit":"/12",
+       "step":2,
+       "default":6,
+       "label":"HTML Content Column"
+    },{
+       "type":"html",
+       "id":"html_content",
+       "label":"HTML Content",
+       "default":"<div class='html-content'><h1>Where does it come from</h1><p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words</p></div>"
+    },{
+       "type":"html",
+       "id":"css_content",
+       "label":"Css",
+       "default":".html-content-class{margin-top: 100px;}.html-content-class h2{margin-bottom: 20px;}"
+    },
+    {
+       "type":"text",
+       "id":"btn_text",
+       "label":"Button Text",
+       "default":"Read More"
+    }
+    
+    ]
+    }
+    ],
+    "presets":[
+    {
+        "name":"Custom Content",
+        "category":"Others",
+        "blocks":[
+        {
+            "type":"image_content"
+        },
+        {
+            "type":"html_content"
+        }
+        ]
+    }
+    
+    ] 
+ }
+ {% endschema %}
